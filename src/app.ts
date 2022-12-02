@@ -11,18 +11,26 @@ app.use(express.raw({ type: '*/*' }));
 
 app.post('/xml-to-json', (req, res) => {
     const content: string = req.body.toString();
-    const result = parser.toJson(content, {sanitize: false});
-    console.log(`/xml-to-json body:\n${content}`);
-    res.setHeader('Content-Type', 'text/plain');
-    res.status(200).end(`${result}`);
+    try {
+        const result = parser.toJson(content, {sanitize: false});
+        console.log(`/xml-to-json body:\n${content}`);
+        res.setHeader('Content-Type', 'text/plain');
+        res.status(200).end(`${result}`);
+    } catch (err) {
+        res.status(500).send('Input is not in XML format!')
+    }
 });
 
 app.post('/json-to-xml', (req, res) => {
     const content: string = req.body.toString();
-    const result = parser.toXml(content);
-    console.log(`/json-to-xml body:\n${content}`);
-    res.setHeader('Content-Type', 'text/plain');
-    res.status(200).end(`${result}`);
+    try {
+        const result = parser.toXml(content);
+        console.log(`/json-to-xml body:\n${content}`);
+        res.setHeader('Content-Type', 'text/plain');
+        res.status(200).end(`${result}`);
+    } catch (err) {
+        res.status(500).end("Input is not in JSON format!");
+    }
 });
 
 app.listen(port, () => {
