@@ -1,9 +1,7 @@
 import express from 'express';
-import * as dotenv from 'dotenv';
 import * as parser from 'xml2json';
 
 const app = express();
-dotenv.config();
 
 const port = process.env.PORT ?? 8080;
 
