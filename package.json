@@ -4,9 +4,9 @@
   "description": "A service that allows you to convert json to xml and vice versa",
   "main": "app.js",
   "scripts": {
-    "start": "node ./dist/app.js",
+    "start": "node ./dist/server.js",
     "build": "npx tsc",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon dist/app.js\""
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon dist/server.js\""
   },
   "repository": {
     "type": "git",
