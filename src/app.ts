@@ -10,12 +10,12 @@ app.use(express.raw({ type: '*/*' }));
 app.post('/xml-to-json', (req, res) => {
     const content: string = req.body.toString();
     try {
-        const result = parser.toJson(content, {sanitize: false});
+        const result = parser.toJson(content, { sanitize: false });
         console.log(`/xml-to-json body:\n${content}`);
         res.setHeader('Content-Type', 'text/plain');
         res.status(200).end(`${result}`);
     } catch (err) {
-        res.status(500).send('Input is not in XML format!')
+        res.status(500).send('Input is not in XML format!');
     }
 });
 
@@ -27,12 +27,13 @@ app.post('/json-to-xml', (req, res) => {
         res.setHeader('Content-Type', 'text/plain');
         res.status(200).end(`${result}`);
     } catch (err) {
-        res.status(500).end("Input is not in JSON format!");
+        res.status(500).end('Input is not in JSON format!');
     }
 });
 
 app.all('/help', (_, res) => {
-    res.status(200).end(`
+    res.status(200).end(
+        `
         Welcome to JSON-XML-Converter service!
         use HTTP POST request to /json-to-xml endpoint to convert json to xml, json must be passed inside request body.
         use HTTP POST request to /xml-to-json endpoint to convert xml to json, xml must be passed inside request body.
@@ -47,8 +48,6 @@ app.all('/help', (_, res) => {
             output: "<foo attr="value">bar</foo>"
     `.replace(/^ +/gm, '')
     );
-})
-
-app.listen(port, () => {
-    console.log(`listening on http://localhost:${port}`);
 });
+
+export { app, port };
